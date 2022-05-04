@@ -12,6 +12,19 @@ export interface Language{
   total_seconds: number
 }
 
+/**
+ * Hold information on language, and count of how many users use interface
+ */
+export class LanguageCount{
+  name: string;
+  users: number;
+
+  constructor(name: string){
+    this.name = name;
+    this.users = 0;
+  }
+}
+
 export interface RunningTotal{
   human_readable_total: string
   human_readable_daily_average: string

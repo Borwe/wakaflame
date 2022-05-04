@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, from, map, mergeMap, Observable, range } from 'rxjs';
-import { LeaderJson, LeaderUser, WakaEditors, WakaReplyJson } from './models/waka-api';
+import { filter, from, map, mergeMap, Observable, range, toArray } from 'rxjs';
+import { LanguageCount, LeaderJson, LeaderUser, WakaEditors, WakaReplyJson } from './models/waka-api';
 
 const MAIN_URL: string = "https://wakaflame-server.herokuapp.com/api/v1/";
 
@@ -67,6 +67,37 @@ export class WakaApiService {
       .pipe(map(obj => {
 	return <WakaEditors>obj 
       }));
+  }
+
+  getLanguagesByUsersInKenya(leaders: Observable<LeaderJson>): Observable<LanguageCount>{
+    return leaders.pipe(
+      mergeMap(leader=> from(leader.running_total.languages)))
+      .pipe(map(lang=> lang.name))
+      .pipe(toArray())
+      .pipe(map(langs_array=>{
+        let langcounts: Array<LanguageCount> = new Array<LanguageCount>();
+        for(let i=0;i<langs_array.length;i++){
+          let lang: string = langs_array[i];
+          //skip if already part of langs
+          if(
+          langcounts
+            .filter(
+              lang_in=> lang_in.name.toLowerCase() == lang.toLowerCase())
+            .length>0){
+            continue;
+          }
+          let langcount = new LanguageCount(lang);
+          for(let j=i+1; j<langs_array.length;j++){
+            if(lang==langs_array[i]){
+              langcount.users+=1;
+            }
+          }
+          langcounts.push(langcount);
+        }
+        console.log("COUNTS: ",langcounts);
+        return langcounts;
+      }))
+      .pipe(mergeMap(langs_array=> from(langs_array)));
   }
 
   getKenyanLeaders(): Observable<LeaderJson>{
