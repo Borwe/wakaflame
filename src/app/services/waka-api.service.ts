@@ -76,20 +76,28 @@ export class WakaApiService {
       .pipe(toArray())
       .pipe(map(langs_array=>{
         let langcounts: Array<LanguageCount> = new Array<LanguageCount>();
+
         for(let i=0;i<langs_array.length;i++){
           let lang: string = langs_array[i];
-          //skip if already part of langs
-          if(
-          langcounts
-            .filter(
-              lang_in=> lang_in.name.toLowerCase() == lang.toLowerCase())
-            .length>0){
-            continue;
-          }
           let langcount = new LanguageCount(lang);
-          for(let j=i+1; j<langs_array.length;j++){
-            if(lang==langs_array[i]){
-              langcount.users+=1;
+
+	  //reset langcount if it already exists to that one
+	  for(let k=0; k<langcounts.length; k++){
+	    if(langcounts[k]!=undefined &&
+	      langcounts[k].name==lang){
+	      langcount.name = langcounts[k].name;
+	      langcount.users = langcounts[k].users;
+	      delete langcounts[k];
+	      break;
+	    }
+	  }
+
+	  if(langcount.users>0){
+	    continue;
+	  }
+          for(let j=0; j<langs_array.length;j++){
+            if(lang==langs_array[j]){
+              langcount.users=langcount.users+1;
             }
           }
           langcounts.push(langcount);
@@ -97,7 +105,13 @@ export class WakaApiService {
         console.log("COUNTS: ",langcounts);
         return langcounts;
       }))
-      .pipe(mergeMap(langs_array=> from(langs_array)));
+      .pipe(mergeMap(langs_array=> from(langs_array)))
+      .pipe(filter(langs=>{
+	if(langs==undefined){
+	  return false
+	}
+	return true
+      }));
   }
 
   getKenyanLeaders(): Observable<LeaderJson>{

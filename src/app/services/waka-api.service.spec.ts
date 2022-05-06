@@ -45,5 +45,8 @@ describe('WakaApiService', () => {
     languages_count.pipe(count()).subscribe(langs=>{
       expect(langs>0).toBeTrue();
     })
+    languages_count.subscribe(langs=>{
+      expect(langs.users>0).toBeTrue();
+    })
   }))
 });
