@@ -4,7 +4,7 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { count, Observable, share } from 'rxjs';
 import { AppModule } from '../app.module';
-import { LanguageCount, LeaderJson, LeaderUser, WakaEditors } from './models/waka-api';
+import { EditorCount, LanguageCount, LeaderJson, LeaderUser, WakaEditors } from './models/waka-api';
 
 import { WakaApiService } from './waka-api.service';
 
@@ -27,11 +27,14 @@ describe('WakaApiService', () => {
     });
   }))
 
-  it('Test getting leaderboard rankings, and languages', waitForAsync(()=>{
+  it('Test getting leaderboard rankings, editors, and languages', waitForAsync(()=>{
     let leaders_ke: Observable<LeaderJson> = service.getKenyanLeaders()
       .pipe(share());
     let languages_count: Observable<LanguageCount> = service
       .getLanguagesByUsersInKenya(leaders_ke);
+    let editors_count: Observable<EditorCount> = service
+      .getEditorsUseInKenya(leaders_ke);
+
     leaders_ke.pipe(count()).subscribe(kenyans=>{
       console.log("No of Kenyan leaders is: ",kenyans);
     })
@@ -42,11 +45,19 @@ describe('WakaApiService', () => {
         expect(leader.user.city.country.toLowerCase() == "kenya").toBeTrue();
       }
     })
+
     languages_count.pipe(count()).subscribe(langs=>{
       expect(langs>0).toBeTrue();
     })
     languages_count.subscribe(langs=>{
       expect(langs.users>0).toBeTrue();
+    })
+
+    editors_count.pipe(count()).subscribe(editors=>{
+      expect(editors>0).toBeTrue();
+    })
+    editors_count.subscribe(editor=>{
+      expect(editor.users>0).toBeTrue();
     })
   }))
 });

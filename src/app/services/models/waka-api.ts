@@ -7,6 +7,11 @@ export interface WakaEditors{
   website: string
 }
 
+export interface WakaUserStatusEditor{
+  text: number
+  name: string
+}
+
 export interface Language{
   name: string
   total_seconds: number
@@ -16,6 +21,16 @@ export interface Language{
  * Hold information on language, and count of how many users use interface
  */
 export class LanguageCount{
+  name: string;
+  users: number;
+
+  constructor(name: string){
+    this.name = name;
+    this.users = 0;
+  }
+}
+
+export class EditorCount{
   name: string;
   users: number;
 
@@ -60,4 +75,9 @@ export interface WakaReplyJson{
   data: any;
   total?: number;
   total_pages: number;
+}
+
+
+export interface WakaStatsReplyJson{
+  data: any;
 }
