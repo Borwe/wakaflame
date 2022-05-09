@@ -35,9 +35,7 @@ export class UserRanksComponent implements OnInit {
       this.loaded = true;
       return leader;
     })).pipe(count())
-    .subscribe(size=>{
-      console.log("Done getting leaders");
-    })
+    .subscribe();
   }
 
 }

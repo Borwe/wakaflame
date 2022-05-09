@@ -59,7 +59,7 @@ export interface LeaderUser{
   display_name: string
   email?: string
   full_name: string
-  is_hirable: boolean
+  is_hireable: boolean
   username: string
   human_readable_website: string
   photo: string
