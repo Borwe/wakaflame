@@ -1,0 +1,5 @@
+<span *ngIf="loaded==false">Loading!</span>
+<p>Top Total Users In Kenya: {{leaders.length}}</p>
+<ul *ngFor="let leader of leaders">
+  <li>{{leader.rank}}. {{leader.user.full_name}}</li>
+</ul>
