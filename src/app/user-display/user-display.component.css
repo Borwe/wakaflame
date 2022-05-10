@@ -1,0 +1,10 @@
+.leader-card{
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+  width: 260px;
+}
+
+.language_button {
+ margin: 12px;
+}

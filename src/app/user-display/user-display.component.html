@@ -1,21 +1,27 @@
-<span *ngIf="leader!=undefined">
-  <img alt="user_img" 
-    src="{{leader.user.photo}}/?s=420&cache=false"
-    width=300 height=300/><br>
-  Global Rank: {{leader.rank}}<br/>
-  Name: {{leader.user.full_name}}<br/>
-  Waka UserName: {{leader.user.username}}<br/>
-  Hirable:
-    <span *ngIf="leader.user.is_hireable==true">Yes</span>
-    <span *ngIf="leader.user.is_hireable==false">No</span> <br/>
-  <span *ngIf="leader.user.email!=undefined">
-  Email: {{leader.user.email}}<br/>
-  </span>
-  <span *ngIf="leader.user.human_readable_website.length>0">
-    WebSite: {{leader.user.human_readable_website}}
-  </span>
-  <h3>Languages Used</h3>
-  <ul *ngFor="let language of leader.running_total.languages">
-    <li>{{language.name}} - Seconds: {{language.total_seconds}}</li>
-  </ul>
-</span>
+<mat-card class="leader-card" *ngIf="leader!=undefined">
+  <mat-card-header>
+    <mat-card-title>Name: {{leader.user.full_name}}</mat-card-title>
+    <mat-card-subtitle>Global Rank: {{leader.rank}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content class="leader_card_holder">
+    <div class="leader_image">
+      <img alt="user_img" 
+      src="{{leader.user.photo}}/?s=420&cache=false" width=190/>
+    </div>
+    <div class="leader_info">
+      Waka UserName: {{leader.user.username}}<br/>
+      Hirable:
+        <span *ngIf="leader.user.is_hireable==true">Yes</span>
+        <span *ngIf="leader.user.is_hireable==false">No</span><br/>
+      <span *ngIf="leader.user.email!=undefined">
+      Email: {{leader.user.email}}<br/>
+      </span>
+      <span *ngIf="leader.user.human_readable_website.length>0">
+        WebSite: {{leader.user.human_readable_website}}
+      </span>
+      <mat-card-footer>
+        <button mat-raised-button class="language_button" color="primary">Languages Used</button>
+      </mat-card-footer>
+    </div>
+  </mat-card-content>
+</mat-card>
