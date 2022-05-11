@@ -4,18 +4,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRanksComponent } from './user-ranks/user-ranks.component';
-import { UserDisplayComponent } from './user-display/user-display.component';
+import { UserDisplayComponent, UserDisplayDialogComponent } from './user-display/user-display.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider'
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserRanksComponent,
-    UserDisplayComponent
+    UserDisplayComponent,
+    UserDisplayDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +28,9 @@ import { MatButtonModule } from '@angular/material/button';
     MatCardModule,
     MatDividerModule,
     MatGridListModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
