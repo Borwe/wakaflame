@@ -1,7 +1,7 @@
 .leader-card{
   display: flex;
   flex-direction: column;
-  margin: 5px;
+  margin: 7px;
   width: 260px;
 }
 

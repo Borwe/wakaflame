@@ -1,5 +1,7 @@
 <span *ngIf="loaded==false">Loading!</span>
 <p>Top Total Users In Kenya: {{leaders.length}}</p>
 <div class="leader_list" >
-    <app-user-display *ngFor="let leader of leaders" class="leader_item" [leader]="leader"></app-user-display><br/>
+  <div *ngFor="let leader of leaders; let i = index">
+    <app-user-display class="leader_item" [index]="i" [leader]="leader"></app-user-display><br/>
+  </div>
 </div>

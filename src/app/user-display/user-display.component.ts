@@ -10,6 +10,7 @@ import { Language, LeaderJson } from '../services/models/waka-api';
 export class UserDisplayComponent implements OnInit {
 
   @Input() leader?: LeaderJson =  undefined;
+  @Input() index: number = 0;
 
   constructor(public dialog: MatDialog) { }
 
@@ -17,7 +18,7 @@ export class UserDisplayComponent implements OnInit {
   }
 
   showLanguages(){
-    let dialogRef = this.dialog.open(UserDisplayDialogComponent,{
+    this.dialog.open(UserDisplayDialogComponent,{
       width: "300px",
       data: this.leader
     });

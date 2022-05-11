@@ -1,6 +1,9 @@
 <mat-card class="leader-card" *ngIf="leader!=undefined">
   <mat-card-header>
-    <mat-card-title>Name: {{leader.user.full_name}}</mat-card-title>
+    <mat-card-title>
+      <button mat-mini-fab color="accent">{{index+1}}</button><br>
+      Name: {{leader.user.full_name}}
+    </mat-card-title>
     <mat-card-subtitle>Global Rank: {{leader.rank}}</mat-card-subtitle>
   </mat-card-header>
   <mat-card-content class="leader_card_holder">

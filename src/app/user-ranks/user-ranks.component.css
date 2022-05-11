@@ -3,6 +3,6 @@
   flex-direction: row;
   flex-wrap: wrap;
   align-items: stretch;
-  align-content: space-evenly;
+  align-content: space-around;
   justify-content: center;
 }
