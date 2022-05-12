@@ -25,3 +25,5 @@ Due to this being a front end application, and the default [api](https://wakatim
 - Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 - Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
+## Contributing:
+Any improvements possible or issues, anyone might see, can be posted as an issue, or if feeling into it, you can also just create a pull request, contributions are welcomed.
