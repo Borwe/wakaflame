@@ -44,3 +44,6 @@ Thumbs.db
 # lsp files
 .log/
 *~
+
+#vim files
+*.swp
