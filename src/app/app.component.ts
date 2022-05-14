@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, share } from 'rxjs';
+import { fromEvent, map, Observable, share } from 'rxjs';
 import { LeaderJson, WakaEditors } from './services/models/waka-api';
 import { ObserverHolderService } from './services/observer-holder.service';
 import { WakaApiService } from './services/waka-api.service';
@@ -11,6 +11,7 @@ import { WakaApiService } from './services/waka-api.service';
 })
 export class AppComponent implements OnInit{
 
+
   constructor(private observer_holder: ObserverHolderService,
     private wakaApi: WakaApiService){
     observer_holder.
@@ -20,6 +21,12 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
+    fromEvent<InputEvent>(
+      <HTMLInputElement>document.getElementById("search_input")
+      ,"input").pipe(map(event=> (event.target as HTMLInputElement).value))
+    .subscribe(val=>{
+      console.log("GOTEN: ",val);
+    })
   }
 
 }

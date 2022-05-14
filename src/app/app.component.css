@@ -9,3 +9,11 @@ mat-toolbar {
 .spacer {
   flex: 1 1 auto;
 }
+
+.search_input{
+  margin-right: 20px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
