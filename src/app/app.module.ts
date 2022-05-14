@@ -22,6 +22,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     UserDisplayDialogComponent
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

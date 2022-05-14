@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, share } from 'rxjs';
 import { LeaderJson, WakaEditors } from './services/models/waka-api';
+import { ObserverHolderService } from './services/observer-holder.service';
 import { WakaApiService } from './services/waka-api.service';
 
 @Component({
@@ -10,12 +11,12 @@ import { WakaApiService } from './services/waka-api.service';
 })
 export class AppComponent implements OnInit{
 
-  leaders_observable: Observable<LeaderJson>;
-  editors_observable: Observable<WakaEditors>;
-
-  constructor(private wakaApi: WakaApiService){
-    this.leaders_observable = this.wakaApi.getKenyanLeaders().pipe(share());
-    this.editors_observable = this.wakaApi.getEditors().pipe(share());
+  constructor(private observer_holder: ObserverHolderService,
+    private wakaApi: WakaApiService){
+    observer_holder.
+      setLeaderObservable(this.wakaApi.getKenyanLeaders().pipe(share()));
+    observer_holder.
+      setEditorsObservable(this.wakaApi.getEditors().pipe(share()));
   }
 
   ngOnInit(): void {

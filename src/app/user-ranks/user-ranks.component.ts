@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {count ,map, Observable, toArray } from 'rxjs';
 import { LeaderJson } from '../services/models/waka-api';
+import { ObserverHolderService } from '../services/observer-holder.service';
 
 @Component({
   selector: 'app-user-ranks',
@@ -9,13 +10,12 @@ import { LeaderJson } from '../services/models/waka-api';
 })
 export class UserRanksComponent implements OnInit {
 
-  @Input() leaders_observable: Observable<LeaderJson> = new Observable();
   loaded: boolean = false;// turn true once gotten users list in order
 
   // To hold ordered list of users
   leaders: Array<LeaderJson> = new Array();
 
-  constructor() { }
+  constructor(private observer_holder: ObserverHolderService) { }
 
   addAndReloadLeadersArray(leader: LeaderJson){
     this.leaders.push(leader);
@@ -30,7 +30,7 @@ export class UserRanksComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.leaders_observable.pipe(map(leader=>{
+    this.observer_holder.getLeadersObservable().pipe(map(leader=>{
       this.addAndReloadLeadersArray(leader);
       this.loaded = true;
       return leader;
