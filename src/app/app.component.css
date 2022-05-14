@@ -5,3 +5,7 @@ mat-toolbar {
   z-index: 1000;
   position: -webkit-sticky;
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
