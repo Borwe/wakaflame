@@ -13,6 +13,7 @@ export class ObserverHolderService {
 
   leaders_observable = new Observable<LeaderJson>();
   editors_observable = new Observable<WakaEditors>();
+  search_observable = new Observable<string>();
 
   constructor() { }
 
@@ -30,5 +31,9 @@ export class ObserverHolderService {
 
   getLeadersObservable(): Observable<LeaderJson>{
     return this.leaders_observable;
+  }
+
+  getSearchObservable(): Observable<string>{
+    return this.search_observable;
   }
 }

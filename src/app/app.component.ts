@@ -21,12 +21,8 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    fromEvent<InputEvent>(
+    this.observer_holder.search_observable=fromEvent<InputEvent>(
       <HTMLInputElement>document.getElementById("search_input")
-      ,"input").pipe(map(event=> (event.target as HTMLInputElement).value))
-    .subscribe(val=>{
-      console.log("GOTEN: ",val);
-    })
+      ,"input").pipe(map(event=> (event.target as HTMLInputElement).value));
   }
-
 }

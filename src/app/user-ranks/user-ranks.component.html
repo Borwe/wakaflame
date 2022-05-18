@@ -1,7 +1,7 @@
 <h2 class="text" *ngIf="loaded==false">Loading...</h2>
 <h1 class="text">Top Total 10,000 Wakatime Users In Kenya: {{leaders.length}}</h1>
 <div class="leader_list" >
-  <div *ngFor="let leader of leaders; let i = index">
+  <div *ngFor="let leader of searched_leaders; let i = index">
     <app-user-display class="leader_item" [index]="i" [leader]="leader"></app-user-display><br/>
   </div>
 </div>
