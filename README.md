@@ -14,6 +14,7 @@ Due to this being a front end application, and the default [api](https://wakatim
 - [x] List top users from Kenya, which are top 10k globally, based on a daily basis.
 - [x] List a specific users, recently used programming languages, with frequency.
 - [x] List total number of Kenyan users, on top 10k list.
+- [x] Search users from search bar.
 
 ### Still to be done, PR's for this are accepted too:
 - [ ] List programming languages used by Kenyans in wakatime, based on frequency, on daily basis.
