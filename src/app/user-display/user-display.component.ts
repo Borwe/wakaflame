@@ -50,14 +50,12 @@ export class UserDisplayDialogComponent implements OnInit {
 	      @Inject(MAT_DIALOG_DATA) public data: LeaderJson) {
 
     if(data!=undefined){
-      data.running_total.languages.forEach((lang)=>{
-	this.total_sum_of_seconds+=lang.total_seconds;
-      });
       data.running_total.languages.forEach((lang_passed)=>{
-	let lang = new Lang(lang_passed.name);
-	lang.percentage = (lang_passed.total_seconds/this.total_sum_of_seconds)*100;
-	this.langs.push(lang);
-      })
+        this.total_sum_of_seconds+=lang_passed.total_seconds;
+        let lang = new Lang(lang_passed.name);
+        lang.percentage = (lang_passed.total_seconds/this.total_sum_of_seconds)*100;
+        this.langs.push(lang);
+      });
     }
   }
 

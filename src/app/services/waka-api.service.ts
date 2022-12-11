@@ -13,7 +13,6 @@ class HttpOptions{
 
   constructor(){
     this.headers = new HttpHeaders();
-    this.headers.append("Access-Control-Allow-Origin","*");
   }
 }
 
@@ -26,25 +25,14 @@ class Client {
   }
 
   get<T>(url:string, options: HttpOptions | undefined): Observable<T>{
-    if(options != undefined){
-      return this.httpClient.get<T>(url,{
-        headers: options.headers,
-        params: options.params,
-        observe: 'body',
-        reportProgress: options.reportProgress,
-        responseType: 'json', withCredentials: options.withCredentials
-      }).pipe(retry(10));
-    }else{
-      let options = new HttpOptions();
-      return this.httpClient.get<T>(url,{
-        headers: options.headers,
-        params: options.params,
-        observe: 'body',
-        reportProgress: options.reportProgress,
-        responseType: 'json',
-        withCredentials: options.withCredentials
-      }).pipe(retry(10));
-    }
+    return this.httpClient.get<T>(url,{
+      headers: options?.headers,
+      params: options?.params,
+      observe: 'body',
+      reportProgress: options?.reportProgress,
+      responseType: 'json',
+      withCredentials: options?.withCredentials
+    }).pipe(retry(10));
   }
 }
 
