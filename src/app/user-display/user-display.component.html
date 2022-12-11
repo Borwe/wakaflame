@@ -12,8 +12,8 @@
       src="{{leader.user.photo}}/?s=420&cache=false" width=190/>
     </div>
     <div class="leader_info">
-      Waka UserName: {{leader.user.username}}<br/>
-      Hirable:
+      Waka User Name: {{leader.user.username}}<br/>
+      Available for hire:
         <span *ngIf="leader.user.is_hireable==true">Yes</span>
         <span *ngIf="leader.user.is_hireable==false">No</span><br/>
       <span *ngIf="leader.user.email!=undefined">

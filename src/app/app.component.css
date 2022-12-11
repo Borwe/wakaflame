@@ -14,6 +14,12 @@ mat-toolbar {
   margin-right: 20px;
 }
 
+.menu_holder{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 html {
   scroll-behavior: smooth;
 }
