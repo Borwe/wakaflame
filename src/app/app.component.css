@@ -20,6 +20,10 @@ mat-toolbar {
   flex-direction: column;
 }
 
+.text{
+  color: white;
+}
+
 html {
   scroll-behavior: smooth;
 }
