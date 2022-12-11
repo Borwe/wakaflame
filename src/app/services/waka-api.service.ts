@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { filter, from, map, mergeMap, Observable, range, retry, toArray } from 'rxjs';
 import { EditorCount, LanguageCount, LeaderJson, LeaderUser, WakaEditors, WakaReplyJson, WakaStatsReplyJson, WakaUserStatusEditor } from './models/waka-api';
 
-const MAIN_URL: string = "https://wakaflame-server.herokuapp.com/api/v1/";
+const MAIN_URL: string = "https://wakaflames.fly.dev/api/v1/";
 
 class HttpOptions{
   headers:HttpHeaders;
