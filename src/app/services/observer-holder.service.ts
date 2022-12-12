@@ -14,6 +14,7 @@ export class ObserverHolderService {
   leaders_observable = new Observable<LeaderJson>();
   editors_observable = new Observable<WakaEditors>();
   search_observable = new Observable<string>();
+  window_width_resize_observable = new Observable<number>();
 
   constructor() { }
 
@@ -21,8 +22,16 @@ export class ObserverHolderService {
     this.leaders_observable=leaders_observable;
   }
 
+  setWindowWidthResizeObservable(window_width_resize_observable: Observable<number>){
+    this.window_width_resize_observable = window_width_resize_observable;
+  }
+
   setEditorsObservable(editors_observable: Observable<WakaEditors> ){
     this.editors_observable = editors_observable;
+  }
+
+  getWindowWidthResizeObservable(): Observable<number>{
+    return this.window_width_resize_observable;
   }
 
   getEditorsObservable(): Observable<WakaEditors>{
