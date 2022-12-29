@@ -17,7 +17,11 @@ Due to this being a front end application, and the default [api](https://wakatim
 - [x] Search users from search bar.
 
 ### Still to be done, PR's for this are accepted too:
-- [ ] List programming languages used by Kenyans in wakatime, based on frequency, on daily basis.
+- List programming languages used by Kenyans in wakatime, based on:
+	- [ ] Hours coded on average, calculted by getting total number of hours of top users divide by number of top users
+	      Who use the language (total hours/ total users).
+	- [ ] Most number of users, calculated by getting number of top users who have used it.
+	
 - [ ] List Editors used by Kenyans in wakatime, based on frequency, on aily bases.
 
 ## Setup Info:
