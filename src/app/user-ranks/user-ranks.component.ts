@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import {count ,map, Observable, toArray } from 'rxjs';
+import { map } from 'rxjs';
 import { LeaderJson } from '../services/models/waka-api';
 import { ObserverHolderService } from '../services/observer-holder.service';
 
@@ -70,5 +70,4 @@ export class UserRanksComponent implements OnInit {
       return false;
     });
   }
-
 }

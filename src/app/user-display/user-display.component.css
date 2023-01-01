@@ -5,6 +5,11 @@
   width: 260px;
 }
 
+.langs-list-item {
+  background-image: linear-gradient(#F0B912, #F0B912);
+  background-repeat: no-repeat;
+}
+
 .language_button {
  margin: 12px;
 }

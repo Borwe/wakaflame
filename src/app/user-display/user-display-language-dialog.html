@@ -1,10 +1,9 @@
 <h1 mat-dialog-title>Languages</h1>
 <div mat-dialog-content>
-  <mat-list role="list" >
-    <div *ngFor="let lang of langs">
-	<mat-list-item style="background-color: #F0B912; box-shadow: 1px 1px 5px #F0B912; border-radius: 3px; width: {{lang.percentage}}%">
-	{{lang.name}}
-	</mat-list-item>
-    </div>
+  <mat-list role="list" class="langs-list-holder">
+    <mat-list-item div *ngFor="let lang of langs" class="langs-list-item" 
+      style="background-size: {{lang.percentage}}px 100%">
+      <span>{{lang.name}}</span>
+    </mat-list-item>
   </mat-list>
 </div>

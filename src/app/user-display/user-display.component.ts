@@ -2,6 +2,11 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Language, LeaderJson } from '../services/models/waka-api';
 
+
+const WIDTH_OF_DIAG=300;
+const WIDTH_OF_DIAG_STR = "300px";
+
+
 @Component({
   selector: 'app-user-display',
   templateUrl: './user-display.component.html',
@@ -19,7 +24,7 @@ export class UserDisplayComponent implements OnInit {
 
   showLanguages(){
     this.dialog.open(UserDisplayDialogComponent,{
-      width: "300px",
+      width: WIDTH_OF_DIAG_STR,
       data: this.leader
     });
   }
@@ -34,6 +39,7 @@ class Lang{
     this.name = name_lang;
     this.percentage = 0;
   }
+
 }
 
 @Component({
@@ -52,8 +58,10 @@ export class UserDisplayDialogComponent implements OnInit {
     if(data!=undefined){
       data.running_total.languages.forEach((lang_passed)=>{
         this.total_sum_of_seconds+=lang_passed.total_seconds;
+      });
+      data.running_total.languages.forEach((lang_passed)=>{
         let lang = new Lang(lang_passed.name);
-        lang.percentage = (lang_passed.total_seconds/this.total_sum_of_seconds)*100;
+        lang.percentage = (lang_passed.total_seconds/this.total_sum_of_seconds)*WIDTH_OF_DIAG;
         this.langs.push(lang);
       });
     }
