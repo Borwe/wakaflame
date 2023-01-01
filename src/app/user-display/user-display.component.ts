@@ -34,12 +34,21 @@ export class UserDisplayComponent implements OnInit {
 class Lang{
   name: string;
   percentage: number;
+  period: number;
 
-  constructor(name_lang: string){
-    this.name = name_lang;
-    this.percentage = 0;
+  constructor(lang: Language, total_sum_of_seconds: number){
+    this.name = lang.name;
+    this.percentage = lang.total_seconds/total_sum_of_seconds*WIDTH_OF_DIAG;
+    this.period = lang.total_seconds;
   }
-
+  
+  transformToHumanReadable(){
+    const hours = Math.trunc(this.period/(60*60));
+    const minutes = Math.trunc((this.period - (hours*60*60))/60);
+    const seconds = Math.trunc(this.period - ((hours*60*60)+(minutes*60)));
+    const result = "Coded for: "+hours+" hrs "+minutes+" mins "+seconds+"s";
+    return result; 
+  }
 }
 
 @Component({
@@ -60,9 +69,7 @@ export class UserDisplayDialogComponent implements OnInit {
         this.total_sum_of_seconds+=lang_passed.total_seconds;
       });
       data.running_total.languages.forEach((lang_passed)=>{
-        let lang = new Lang(lang_passed.name);
-        lang.percentage = (lang_passed.total_seconds/this.total_sum_of_seconds)*WIDTH_OF_DIAG;
-        this.langs.push(lang);
+        this.langs.push(new Lang(lang_passed, this.total_sum_of_seconds));
       });
     }
   }

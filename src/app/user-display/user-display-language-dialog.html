@@ -1,9 +1,10 @@
-<h1 mat-dialog-title>Languages</h1>
+<h1 mat-dialog-title>Languages coded in last 7 days</h1>
 <div mat-dialog-content>
   <mat-list role="list" class="langs-list-holder">
     <mat-list-item div *ngFor="let lang of langs" class="langs-list-item" 
       style="background-size: {{lang.percentage}}px 100%">
-      <span>{{lang.name}}</span>
+      <div matListItemTitle>{{lang.name}}</div>
+      <div matListItemLine>{{lang.transformToHumanReadable()}}</div>
     </mat-list-item>
   </mat-list>
 </div>
