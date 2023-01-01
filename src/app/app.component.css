@@ -2,21 +2,31 @@ mat-toolbar {
   box-shadow: 2px 2px 80px #444444;
   position: fixed;
   top: 0;
-  z-index: 1000;
+  z-index: 100;
   position: -webkit-sticky;
 }
+
+#loading_bar {
+  position: fixed;
+  top:0;
+  z-index: 1000;
+}
+
+#logo{
+  height: 70px;
+}
+
 
 .spacer {
   flex: 1 1 auto;
 }
 
 .search_input{
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .menu_holder{
   display: flex;
-  justify-content: center;
   flex-direction: column;
 }
 
