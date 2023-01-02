@@ -10,7 +10,6 @@ import { ObserverHolderService } from '../services/observer-holder.service';
 })
 export class UserRanksComponent implements OnInit {
 
-  loaded: boolean = false;// turn true once gotten users list in order
 
   // To hold ordered list of users
   leaders: Array<LeaderJson> = new Array();
@@ -27,7 +26,6 @@ export class UserRanksComponent implements OnInit {
     this.observer_holder.getLeadersObservable().pipe(map(leader=>{
       this.addAndReloadLeadersArray(leader);
       this.filterLeadersArrayBySearch(this.search);
-      this.loaded = true;
       return leader;
     })).subscribe();
 

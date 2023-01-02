@@ -14,6 +14,7 @@ export const MIN_WIDTH = 520;//minimum width before we push items into side menu
 export class AppComponent implements OnInit{
 
   width_is_less_than_minimum = true;
+  show_loading_bar = true;
 
   constructor(private observer_holder: ObserverHolderService,
     private wakaApi: WakaApiService){
@@ -22,12 +23,16 @@ export class AppComponent implements OnInit{
     observer_holder.
       setEditorsObservable(this.wakaApi.getEditors().pipe(share()));
     observer_holder.setWindowWidthResizeObservable(fromEvent(window,
-      "resize").pipe(map(event=> window.innerWidth)));
+      "resize").pipe(map(_ => window.innerWidth)));
   }
 
   ngOnInit(): void {
     //resize view to be responsive on first load on small screens
     this.handleResizing(window.innerWidth);
+    this.observer_holder.getLeadersObservable().subscribe( (_)=>{},
+      (_)=>{}, ()=>{
+        this.show_loading_bar = false;
+    })
   }
 
   ngAfterViewInit(): void{
