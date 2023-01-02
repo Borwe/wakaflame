@@ -1,7 +1,7 @@
 <mat-card appearance="outlined" class="leader-card" *ngIf="leader!=undefined">
   <mat-card-header>
-    <mat-card-title>
-      <button mat-mini-fab color="accent">{{index+1}}</button><br>
+    <mat-card-title class="text">
+      <button mat-mini-fab color="accent"><b>{{index+1}}</b></button><br>
       Name: {{leader.user.full_name}}
     </mat-card-title>
     <mat-card-subtitle>Global Rank: {{leader.rank}}</mat-card-subtitle>
@@ -11,7 +11,7 @@
       <img alt="user_img" 
       src="{{leader.user.photo}}/?s=420&cache=false" width=190/>
     </div>
-    <div class="leader_info">
+    <div class="leader_info text">
       Waka User Name: {{leader.user.username}}<br/>
       Available for hire:
         <span *ngIf="leader.user.is_hireable==true">Yes</span>
