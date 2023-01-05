@@ -6,7 +6,7 @@ I like to check my progress and compare with other devs, wakatime is one such to
 With that said, this is a project to show most active Kenya developers based on wakatime plugin which is available for multiple IDEs and editors. Main reason for it existing is due to the fact that the [official](https://wakatime.com/leaders?country_code=KE) Kenyan leaderboard lags behind, so project uses the global leaderboards [api](https://wakatime.com/api/v1/leaders) , which is more current and is updated more often.
 
 ## How it works.
-Due to this being a front end application, and the default [api](https://wakatime.com/api/v1/leaders), and all it's other endpoints don't support CORS when the request is made from the browser, we have to send the request via proxy at, `https://wakaflame-server.herokuapp.com/api/v1/leaders` which it's code is available at `https://github.com/Borwe/wakaflame-server`, project is also open for contribution same as this one.
+Due to this being a front end application, and the default [api](https://wakatime.com/api/v1/leaders), and all it's other endpoints don't support CORS when the request is made from the browser, we have to send the request via proxy at, `https://wakaflames.fly.dev/api/v1/` which it's code is available at `https://github.com/Borwe/wakaflame-server`, project is also open for contribution same as this one.
 
 ## Features:
 
@@ -26,7 +26,7 @@ Due to this being a front end application, and the default [api](https://wakatim
 
 ## Setup Info:
 
-- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.2.
+- This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.4.
 - Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 - Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 

@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRanksComponent } from './user-ranks/user-ranks.component';
@@ -17,6 +16,13 @@ import { MatInputModule } from '@angular/material/input';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { RouterModule, Routes } from '@angular/router';
+
+
+const routes: Routes = [
+  {path: '', component: UserRanksComponent},
+  {path: '**', redirectTo: ''},
+];
 
 @NgModule({
   declarations: [
@@ -26,9 +32,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     UserDisplayDialogComponent
   ],
   imports: [
-    AppRoutingModule,
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatCardModule,
@@ -41,7 +45,8 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatInputModule,
     MatMenuModule,
     MatIconModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    RouterModule.forRoot(routes)
   ],
   providers: [],
   bootstrap: [AppComponent]
