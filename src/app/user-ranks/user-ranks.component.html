@@ -1,6 +1,7 @@
-<h1 class="text">Top Total 10,000 Wakatime Users In Kenya: {{leaders.length}}</h1>
+<h1 class="text">There are {{observer_holder.leaders.length}} Devs from Kenya that make up the top 10,000 global users</h1>
 <div class="leader_list" >
-  <div *ngFor="let leader of searched_leaders; let i = index">
-    <app-user-display class="leader_item" [index]="i" [leader]="leader"></app-user-display><br/>
-  </div>
+    <app-user-display 
+      *ngFor="let leader of observer_holder.leaders; let i = index"
+      class="leader_item" id="{{leader.user.username}}" 
+      [index]="i" [leader]="leader"></app-user-display><br/>
 </div>

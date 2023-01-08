@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { filter, from, map, mergeMap, Observable, range, retry, toArray } from 'rxjs';
-import { EditorCount, LanguageCount, LeaderJson, LeaderUser, WakaEditors, WakaReplyJson, WakaStatsReplyJson, WakaUserStatusEditor } from './models/waka-api';
+import { Connectable, filter, from, map, mergeMap, Observable, range, retry, toArray } from 'rxjs';
+import { EditorCount, Language, LanguageCount, LeaderJson, LeaderUser, WakaEditors, WakaReplyJson, WakaStatsReplyJson, WakaUserStatusEditor } from './models/waka-api';
 
 const MAIN_URL: string = "https://wakaflames.fly.dev/api/v1/";
 
@@ -54,49 +54,6 @@ export class WakaApiService {
     .pipe(mergeMap(editors_array => from(editors_array)))
     .pipe(map(obj => {
       return <WakaEditors>obj 
-    }));
-  }
-
-  getLanguagesByUsersInKenya(leaders: Observable<LeaderJson>): Observable<LanguageCount>{
-    return leaders.pipe(
-      mergeMap(leader=> from(leader.running_total.languages)))
-    .pipe(map(lang=> lang.name))
-    .pipe(toArray())
-    .pipe(map(langs_array=>{
-      let langcounts: Array<LanguageCount> = new Array<LanguageCount>();
-
-      for(let i=0;i<langs_array.length;i++){
-        let lang: string = langs_array[i];
-        let langcount = new LanguageCount(lang);
-
-        //reset langcount if it already exists to that one
-        for(let k=0; k<langcounts.length; k++){
-          if(langcounts[k]!=undefined && langcounts[k].name==lang){
-            langcount.name = langcounts[k].name;
-            langcount.users = langcounts[k].users;
-            delete langcounts[k];
-            break;
-          }
-        }
-
-        if(langcount.users>0){
-          continue;
-        }
-        for(let j=0; j<langs_array.length;j++){
-          if(lang==langs_array[j]){
-            langcount.users=langcount.users+1;
-          }
-        }
-        langcounts.push(langcount);
-      }
-      return langcounts;
-    }))
-    .pipe(mergeMap(langs_array=> from(langs_array)))
-    .pipe(filter(langs=>{
-      if(langs==undefined){
-        return false
-      }
-      return true
     }));
   }
 

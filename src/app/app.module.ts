@@ -17,11 +17,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule, Routes } from '@angular/router';
+import { LanguagesDisplayComponent } from './languages-display/languages-display.component';
 
 
 const routes: Routes = [
-  {path: '', component: UserRanksComponent},
-  {path: '**', redirectTo: ''},
+  {path: 'users', component: UserRanksComponent},
+  {path: 'languages', component: LanguagesDisplayComponent},
+  {path: '**', redirectTo: 'users'},
 ];
 
 @NgModule({
@@ -29,7 +31,8 @@ const routes: Routes = [
     AppComponent,
     UserRanksComponent,
     UserDisplayComponent,
-    UserDisplayDialogComponent
+    UserDisplayDialogComponent,
+    LanguagesDisplayComponent
   ],
   imports: [
     BrowserModule,

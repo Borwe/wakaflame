@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { LeaderJson, WakaEditors } from './models/waka-api';
+import { Observable, Connectable } from 'rxjs';
+import { Language, LanguageCount, LeaderJson, WakaEditors } from './models/waka-api';
 
 /**
  * Service used for passing obseravables around between
@@ -11,14 +11,20 @@ import { LeaderJson, WakaEditors } from './models/waka-api';
 })
 export class ObserverHolderService {
 
-  leaders_observable = new Observable<LeaderJson>();
+  leaders_observable!: Connectable<LeaderJson>;
   editors_observable = new Observable<WakaEditors>();
   search_observable = new Observable<string>();
   window_width_resize_observable = new Observable<number>();
 
+  leaders = new Array<LeaderJson>();
+
+  languages = new Array<LanguageCount>();
+  lang_with_most_users_order = new Array<LanguageCount>();
+  lang_with_most_time_order = new Array<LanguageCount>();
+
   constructor() { }
 
-  setLeaderObservable(leaders_observable: Observable<LeaderJson>){
+  setLeaderObservable(leaders_observable: Connectable<LeaderJson>){
     this.leaders_observable=leaders_observable;
   }
 
@@ -38,7 +44,7 @@ export class ObserverHolderService {
     return this.editors_observable;
   }
 
-  getLeadersObservable(): Observable<LeaderJson>{
+  getLeadersObservable(): Connectable<LeaderJson>{
     return this.leaders_observable;
   }
 

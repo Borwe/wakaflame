@@ -4,6 +4,7 @@ mat-toolbar {
   top: 0;
   z-index: 100;
   position: -webkit-sticky;
+  display: flex;
 }
 
 #loading_bar {
@@ -16,6 +17,21 @@ mat-toolbar {
   height: 70px;
 }
 
+.horizontal_nav {
+  display: flex;
+  padding: 0;
+}
+
+
+.horizontal_nav_item {
+  height: auto;
+  width: auto;
+}
+
+.active_nav_item {
+  background-color: #ff0000;
+  box-shadow: 2px 2px 80px #444444;
+}
 
 .spacer {
   flex: 1 1 auto;

@@ -3,6 +3,16 @@
 <mat-toolbar color="primary">
   <img alt="logo" id=logo src="assets/waka-flame.svg">
   <span>Waka Flame</span>
+
+  <mat-nav-list class="horizontal_nav">
+    <mat-list-item class="horizontal_nav_item">
+      <a routerLink="users" routerLinkActive="active_nav_item">Users</a>
+    </mat-list-item>
+    <mat-list-item class="horizontal_nav_item">
+      <a routerLink="languages" routerLinkActive="active_nav_item">Languages</a>
+    </mat-list-item>
+  </mat-nav-list>
+
   <span class="spacer"></span>
   <div id="expanded_3_menu">
     <mat-form-field appearance="outline" subscriptSizing="dynamic" color="primary"  class="search_input">

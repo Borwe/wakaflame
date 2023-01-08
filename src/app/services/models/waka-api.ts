@@ -23,10 +23,12 @@ export interface Language{
 export class LanguageCount{
   name: string;
   users: number;
+  seconds: number;
 
-  constructor(name: string){
-    this.name = name;
-    this.users = 0;
+  constructor(lang: Language){
+    this.name = lang.name;
+    this.users = 1;
+    this.seconds = lang.total_seconds;
   }
 }
 

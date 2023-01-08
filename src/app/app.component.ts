@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { fromEvent, map, Observable, share } from 'rxjs';
-import { LeaderJson, WakaEditors } from './services/models/waka-api';
+import { connectable, from, fromEvent, map, merge, mergeMap, Observable, share, toArray } from 'rxjs';
+import { LanguageCount, LeaderJson, WakaEditors } from './services/models/waka-api';
 import { ObserverHolderService } from './services/observer-holder.service';
 import { WakaApiService } from './services/waka-api.service';
 
@@ -18,21 +18,101 @@ export class AppComponent implements OnInit{
 
   constructor(private observer_holder: ObserverHolderService,
     private wakaApi: WakaApiService){
-    observer_holder.
-      setLeaderObservable(this.wakaApi.getKenyanLeaders().pipe(share()));
+    let kenyan_leaders = connectable(this.wakaApi.getKenyanLeaders());
+    //setup observables
     observer_holder.
       setEditorsObservable(this.wakaApi.getEditors().pipe(share()));
     observer_holder.setWindowWidthResizeObservable(fromEvent(window,
       "resize").pipe(map(_ => window.innerWidth)));
+
+
+    //set leaders
+    let fill_leaders_observable = kenyan_leaders.pipe(map(leader=>{
+      this.observer_holder.leaders.push(leader);
+      this.observer_holder.leaders.sort((l1,l2)=>{
+        if(l1.rank>l2.rank){
+          return 1;
+        }else if(l1.rank < l2.rank){
+          return -1;
+        }
+        return 0;
+      });
+    }));
+    //set languages
+    let languages_filler_observable = kenyan_leaders.pipe(
+      map(leaderjson=> leaderjson.running_total.languages),
+      mergeMap(langs=> from(langs)),
+      map(lang=>{
+        let loc = -1;//mark location where language exists, -1 means not found
+        for(let i=0; i<this.observer_holder.languages.length; i++){
+          let lang_count = this.observer_holder.languages[i];
+          if(lang_count.name == lang.name){
+            loc = i;
+            break;
+          }
+        }
+        
+        if(loc==-1){
+          //meaning language not found, then add it to array
+          this.observer_holder.languages.push(new LanguageCount(lang));
+        }else{
+          //meaning we found the language
+          let lang_count = this.observer_holder.languages[loc];
+          lang_count.users+=1;
+          lang_count.seconds+=lang.total_seconds;
+          this.observer_holder.languages[loc] = lang_count;
+        }
+
+        //refresh langs arrays
+        this.observer_holder.lang_with_most_users_order = 
+          [...this.observer_holder.languages];
+        this.observer_holder.lang_with_most_time_order = 
+          [...this.observer_holder.languages];
+        
+        //sort by users
+        this.observer_holder.lang_with_most_users_order.sort((l1,l2)=>{
+          if(l1.users>l2.users){
+            return -1;
+          }else if(l1.users < l2.users){
+            return 1;
+          }
+          return 0;
+        });
+
+
+        //sort by time
+        this.observer_holder.lang_with_most_time_order.sort((l1,l2)=>{
+          if(l1.seconds>l2.seconds){
+            return -1;
+          }else if(l1.seconds < l2.seconds){
+            return 1;
+          }
+          return 0;
+        });
+        return lang;
+      })
+    );
+    //set loading bar
+    let loading_bar_observable = merge(
+      fill_leaders_observable, languages_filler_observable);
+
+
+    //subscribe
+    loading_bar_observable.subscribe(null, null,
+      ()=>{
+        this.show_loading_bar = false;
+        this.observer_holder.languages.forEach(lang=>{
+          console.log(lang);
+        })
+    });
+
+    //connect the observable
+    kenyan_leaders.connect();
   }
 
   ngOnInit(): void {
     //resize view to be responsive on first load on small screens
     this.handleResizing(window.innerWidth);
-    this.observer_holder.getLeadersObservable().subscribe( (_)=>{},
-      (_)=>{}, ()=>{
-        this.show_loading_bar = false;
-    })
   }
 
   ngAfterViewInit(): void{
