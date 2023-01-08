@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { connectable, from, fromEvent, map, merge, mergeMap, Observable, share, toArray } from 'rxjs';
-import { LanguageCount, LeaderJson, WakaEditors } from './services/models/waka-api';
+import { connectable, from, fromEvent, map, merge, mergeMap, share } from 'rxjs';
+import { LanguageCount } from './services/models/waka-api';
 import { ObserverHolderService } from './services/observer-holder.service';
 import { WakaApiService } from './services/waka-api.service';
 
@@ -101,9 +101,6 @@ export class AppComponent implements OnInit{
     loading_bar_observable.subscribe(null, null,
       ()=>{
         this.show_loading_bar = false;
-        this.observer_holder.languages.forEach(lang=>{
-          console.log(lang);
-        })
     });
 
     //connect the observable
