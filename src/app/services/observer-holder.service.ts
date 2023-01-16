@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { Observable, Connectable } from 'rxjs';
 import { Language, LanguageCount, LeaderJson, WakaEditors } from './models/waka-api';
 
@@ -18,15 +20,14 @@ export class ObserverHolderService {
 
   leaders = new Array<LeaderJson>();
 
+  lang_with_most_users_mat = new MatTableDataSource<LanguageCount>();
+  users_table?: MatTable<LanguageCount>;
+  users_paginator?: MatPaginator;
   languages = new Array<LanguageCount>();
   lang_with_most_users_order = new Array<LanguageCount>();
   lang_with_most_time_order = new Array<LanguageCount>();
 
   constructor() { }
-
-  setLeaderObservable(leaders_observable: Connectable<LeaderJson>){
-    this.leaders_observable=leaders_observable;
-  }
 
   setWindowWidthResizeObservable(window_width_resize_observable: Observable<number>){
     this.window_width_resize_observable = window_width_resize_observable;
@@ -42,10 +43,6 @@ export class ObserverHolderService {
 
   getEditorsObservable(): Observable<WakaEditors>{
     return this.editors_observable;
-  }
-
-  getLeadersObservable(): Connectable<LeaderJson>{
-    return this.leaders_observable;
   }
 
   getSearchObservable(): Observable<string>{

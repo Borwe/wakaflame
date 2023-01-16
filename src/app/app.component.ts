@@ -89,6 +89,25 @@ export class AppComponent implements OnInit{
           }
           return 0;
         });
+
+        //add indexes
+        for(let i = 0;
+          i<this.observer_holder.lang_with_most_users_order.length;i++){
+          this.observer_holder.lang_with_most_users_order[i].position=i+1;
+        }
+
+        //set matdatasources
+        this.observer_holder.lang_with_most_users_mat.data = 
+          this.observer_holder.lang_with_most_users_order;
+        if(this.observer_holder.users_table!=undefined){
+          console.log("redraw");
+          this.observer_holder.users_table.renderRows();
+        }
+        if(this.observer_holder.users_paginator!=undefined){
+          console.log("re-paginate");
+          this.observer_holder.lang_with_most_users_mat.paginator = 
+            this.observer_holder.users_paginator;
+        }
         return lang;
       })
     );

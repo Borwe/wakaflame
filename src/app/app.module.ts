@@ -18,6 +18,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { RouterModule, Routes } from '@angular/router';
 import { LanguagesDisplayComponent } from './languages-display/languages-display.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 const routes: Routes = [
@@ -38,6 +40,8 @@ const routes: Routes = [
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    MatPaginatorModule,
+    MatTableModule,
     MatCardModule,
     MatDividerModule,
     MatGridListModule,

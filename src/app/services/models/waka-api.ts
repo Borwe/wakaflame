@@ -21,11 +21,13 @@ export interface Language{
  * Hold information on language, and count of how many users use interface
  */
 export class LanguageCount{
+  position: number;
   name: string;
   users: number;
   seconds: number;
 
   constructor(lang: Language){
+    this.position = 0;
     this.name = lang.name;
     this.users = 1;
     this.seconds = lang.total_seconds;
