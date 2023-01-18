@@ -11,10 +11,13 @@ import { ObserverHolderService } from '../services/observer-holder.service';
 })
 export class LanguagesDisplayComponent implements OnInit {
 
-  columnsToDisplay = ["position","name","users"];
+  userColumnsToDisplay = ["position","name","users"];
+  timeColumnsToDisplay = ["position","name","time"];
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild('users_paginator') user_paginator!: MatPaginator;
   @ViewChild('users_table') users_table!: MatTable<LanguageCount>;
+  @ViewChild('times_paginator') time_paginator!: MatPaginator;
+  @ViewChild('times_table') times_table!: MatTable<LanguageCount>;
 
   constructor(public observer_holder: ObserverHolderService){
   }
@@ -23,15 +26,13 @@ export class LanguagesDisplayComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    this.observer_holder.lang_with_most_users_mat.paginator = this.paginator;
-    this.observer_holder.users_table = this.users_table;
-    this.users_table.renderRows();
-    console.log("TABLES BABY!!!!");
+    this.observer_holder.langs_mat_tables.
+      setUI(this.users_table, this.user_paginator, this.times_table
+        ,this.time_paginator);
+    this.observer_holder.langs_mat_tables.redrawTables();
   }
 
   ngOnDestroy(){
-    this.observer_holder.users_table = undefined;
-    this.observer_holder.users_paginator = undefined;
-    console.log("LANGS DESTROYED");
+    this.observer_holder.langs_mat_tables.unSet();
   }
 }

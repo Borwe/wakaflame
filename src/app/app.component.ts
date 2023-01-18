@@ -65,9 +65,11 @@ export class AppComponent implements OnInit{
 
         //refresh langs arrays
         this.observer_holder.lang_with_most_users_order = 
-          [...this.observer_holder.languages];
+          JSON.parse(JSON.stringify(this.observer_holder.languages));
+        //[...this.observer_holder.languages];
         this.observer_holder.lang_with_most_time_order = 
-          [...this.observer_holder.languages];
+          [...this.observer_holder.languages].map(i=>i);
+          //[...this.observer_holder.languages];
         
         //sort by users
         this.observer_holder.lang_with_most_users_order.sort((l1,l2)=>{
@@ -94,20 +96,14 @@ export class AppComponent implements OnInit{
         for(let i = 0;
           i<this.observer_holder.lang_with_most_users_order.length;i++){
           this.observer_holder.lang_with_most_users_order[i].position=i+1;
+          this.observer_holder.lang_with_most_time_order[i].position=i+1;
         }
+        this.observer_holder.langs_mat_tables.setUsersData(
+          this.observer_holder.lang_with_most_users_order,
+          this.observer_holder.lang_with_most_time_order);
 
-        //set matdatasources
-        this.observer_holder.lang_with_most_users_mat.data = 
-          this.observer_holder.lang_with_most_users_order;
-        if(this.observer_holder.users_table!=undefined){
-          console.log("redraw");
-          this.observer_holder.users_table.renderRows();
-        }
-        if(this.observer_holder.users_paginator!=undefined){
-          console.log("re-paginate");
-          this.observer_holder.lang_with_most_users_mat.paginator = 
-            this.observer_holder.users_paginator;
-        }
+        //re-render
+        this.observer_holder.langs_mat_tables.redrawTables();
         return lang;
       })
     );

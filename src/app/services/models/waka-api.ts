@@ -32,6 +32,14 @@ export class LanguageCount{
     this.users = 1;
     this.seconds = lang.total_seconds;
   }
+
+  transformToHumanReadable(): string{
+    const hours = Math.trunc(this.seconds/(60*60));
+    const minutes = Math.trunc((this.seconds - (hours*60*60))/60);
+    const seconds = Math.trunc(this.seconds - ((hours*60*60)+(minutes*60)));
+    const result = hours+" hrs "+minutes+" mins "+seconds+"s";
+    return result; 
+  }
 }
 
 export class EditorCount{
