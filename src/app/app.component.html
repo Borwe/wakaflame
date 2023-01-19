@@ -1,18 +1,19 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="over" opened #menu_sidenav>
+  <mat-sidenav mode="over" #menu_sidenav>
     <h1>FUCK YEAH</h1>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-progress-bar color="accent" *ngIf=show_loading_bar id="loading_bar" mode="indeterminate"></mat-progress-bar>
     <mat-toolbar  color="primary">
       <button mat-icon-button aria-label="Show Main Sections"
-        id="show_side_nav_button" #show_side_nav_button>
+        id="show_side_nav_button" (click)="menu_sidenav.toggle()" #show_side_nav_button>
         <mat-icon>menu</mat-icon>
       </button>
       <img alt="logo" id=logo src="assets/waka-flame.svg">
       <span>Waka Flame</span>
 
-      <mat-nav-list class="horizontal_nav">
+      <div id="wide_screen_nav_list">
+      <mat-nav-list class="horizontal_nav" >
         <mat-list-item class="horizontal_nav_item">
           <a routerLink="users" routerLinkActive="active_nav_item">Users</a>
         </mat-list-item>
@@ -20,6 +21,7 @@
           <a routerLink="languages" routerLinkActive="active_nav_item">Languages</a>
         </mat-list-item>
       </mat-nav-list>
+      </div>
 
       <span class="spacer"></span>
       <div id="expanded_3_menu">

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatButton } from '@angular/material/button';
+import { MatNavList } from '@angular/material/list';
 import { MatSidenav } from '@angular/material/sidenav';
 import { connectable, from, fromEvent, map, merge, mergeMap, share } from 'rxjs';
 import { LanguageCount } from './services/models/waka-api';
@@ -20,7 +21,6 @@ export class AppComponent implements OnInit{
   width_is_less_than_minimum = true;
   show_loading_bar = true;
   @ViewChild('menu_sidenav') menu_sidenav!: MatSidenav;
-  @ViewChild('show_side_nav_button') show_side_nav_button!: MatButton;
 
   constructor(private observer_holder: ObserverHolderService,
     private wakaApi: WakaApiService){
@@ -143,32 +143,32 @@ export class AppComponent implements OnInit{
   }
 
   handleResizing(width: number): void{
+    let wide_nav_list = document.getElementById("wide_screen_nav_list");
+    let show_nav_button = document.getElementById("show_side_nav_button");
+    let expanded_3_menu = document.getElementById("expanded_3_menu");
+
     if(width<MIN_WIDTH){
-      let show_nav_button = document.getElementById("show_side_nav_button");
-      if(show_nav_button!=undefined){
-        show_nav_button.style.display="block";
-        show_nav_button.style.visibility="visible";
-      }
       this.width_is_less_than_minimum=true;
 
-      let expanded_3_menu = document.getElementById("expanded_3_menu");
-      if(expanded_3_menu!=undefined){
-        expanded_3_menu.style.display="none";
-        expanded_3_menu.style.visibility="hidden";
-      }
-    }else{
-      let show_nav_button = document.getElementById("show_side_nav_button");
-      if(show_nav_button!=undefined){
-        show_nav_button.style.display="none";
-        show_nav_button.style.visibility="hidden";
-      }
+      wide_nav_list!.style.display="none";
+      wide_nav_list!.style.visibility="hidden";
 
+      show_nav_button!.style.display="block";
+      show_nav_button!.style.visibility="visible";
+
+      expanded_3_menu!.style.display="none";
+      expanded_3_menu!.style.visibility="hidden";
+    }else{
       this.width_is_less_than_minimum=false;
-      let expanded_3_menu = document.getElementById("expanded_3_menu");
-      if(expanded_3_menu!=undefined){
-        expanded_3_menu.style.display="block";
-        expanded_3_menu.style.visibility="visible";
-      }
+
+      wide_nav_list!.style.display="block";
+      wide_nav_list!.style.visibility="visible";
+
+      show_nav_button!.style.display="none";
+      show_nav_button!.style.visibility="hidden";
+
+      expanded_3_menu!.style.display="block";
+      expanded_3_menu!.style.visibility="visible";
     }
   }
 
