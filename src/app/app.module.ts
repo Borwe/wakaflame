@@ -20,6 +20,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LanguagesDisplayComponent } from './languages-display/languages-display.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatSidenavModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
     MatTableModule,

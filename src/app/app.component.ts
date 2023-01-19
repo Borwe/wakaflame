@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatButton } from '@angular/material/button';
+import { MatSidenav } from '@angular/material/sidenav';
 import { connectable, from, fromEvent, map, merge, mergeMap, share } from 'rxjs';
 import { LanguageCount } from './services/models/waka-api';
 import { ObserverHolderService } from './services/observer-holder.service';
 import { WakaApiService } from './services/waka-api.service';
 
-export const MIN_WIDTH = 520;//minimum width before we push items into side menu
+// minimum width before we push items into side menu
+// and burger menus
+export const MIN_WIDTH = 700;
 
 @Component({
   selector: 'app-root',
@@ -15,6 +19,8 @@ export class AppComponent implements OnInit{
 
   width_is_less_than_minimum = true;
   show_loading_bar = true;
+  @ViewChild('menu_sidenav') menu_sidenav!: MatSidenav;
+  @ViewChild('show_side_nav_button') show_side_nav_button!: MatButton;
 
   constructor(private observer_holder: ObserverHolderService,
     private wakaApi: WakaApiService){
@@ -66,10 +72,8 @@ export class AppComponent implements OnInit{
         //refresh langs arrays
         this.observer_holder.lang_with_most_users_order = 
           JSON.parse(JSON.stringify(this.observer_holder.languages));
-        //[...this.observer_holder.languages];
         this.observer_holder.lang_with_most_time_order = 
           [...this.observer_holder.languages].map(i=>i);
-          //[...this.observer_holder.languages];
         
         //sort by users
         this.observer_holder.lang_with_most_users_order.sort((l1,l2)=>{
@@ -140,13 +144,25 @@ export class AppComponent implements OnInit{
 
   handleResizing(width: number): void{
     if(width<MIN_WIDTH){
+      let show_nav_button = document.getElementById("show_side_nav_button");
+      if(show_nav_button!=undefined){
+        show_nav_button.style.display="block";
+        show_nav_button.style.visibility="visible";
+      }
       this.width_is_less_than_minimum=true;
+
       let expanded_3_menu = document.getElementById("expanded_3_menu");
       if(expanded_3_menu!=undefined){
         expanded_3_menu.style.display="none";
         expanded_3_menu.style.visibility="hidden";
       }
     }else{
+      let show_nav_button = document.getElementById("show_side_nav_button");
+      if(show_nav_button!=undefined){
+        show_nav_button.style.display="none";
+        show_nav_button.style.visibility="hidden";
+      }
+
       this.width_is_less_than_minimum=false;
       let expanded_3_menu = document.getElementById("expanded_3_menu");
       if(expanded_3_menu!=undefined){
