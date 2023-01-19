@@ -24,12 +24,15 @@ mat-toolbar {
 
 
 .horizontal_nav_item {
-  height: auto;
   width: auto;
 }
 
+.horizontal_nav_item_in_side {
+  width: 100;
+}
+
 .active_nav_item {
-  background-color: #ff0000;
+  background-color: #cc0000;
   box-shadow: 2px 2px 80px #444444;
 }
 

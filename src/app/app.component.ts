@@ -9,7 +9,7 @@ import { WakaApiService } from './services/waka-api.service';
 
 // minimum width before we push items into side menu
 // and burger menus
-export const MIN_WIDTH = 700;
+export const MIN_WIDTH = 750;
 
 @Component({
   selector: 'app-root',

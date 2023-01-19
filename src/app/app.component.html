@@ -1,6 +1,19 @@
 <mat-sidenav-container>
   <mat-sidenav mode="over" #menu_sidenav>
-    <h1>FUCK YEAH</h1>
+    <mat-nav-list >
+      <mat-list-item class="horizontal_nav_item_in_side">
+        <a mat-button 
+          routerLink="users" routerLinkActive="active_nav_item">
+          Users
+        </a>
+      </mat-list-item>
+      <mat-list-item class="horizontal_nav_item_in_side">
+        <a mat-button
+          routerLink="languages" routerLinkActive="active_nav_item">
+          Languages
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-progress-bar color="accent" *ngIf=show_loading_bar id="loading_bar" mode="indeterminate"></mat-progress-bar>
@@ -15,10 +28,16 @@
       <div id="wide_screen_nav_list">
       <mat-nav-list class="horizontal_nav" >
         <mat-list-item class="horizontal_nav_item">
-          <a routerLink="users" routerLinkActive="active_nav_item">Users</a>
+          <a mat-stroked-button 
+            routerLink="users" routerLinkActive="active_nav_item">
+            Users
+          </a>
         </mat-list-item>
         <mat-list-item class="horizontal_nav_item">
-          <a routerLink="languages" routerLinkActive="active_nav_item">Languages</a>
+          <a mat-stroked-button
+            routerLink="languages" routerLinkActive="active_nav_item">
+            Languages
+          </a>
         </mat-list-item>
       </mat-nav-list>
       </div>
